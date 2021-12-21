@@ -10,7 +10,7 @@ RUN pip install --upgrade pip
 
 COPY . .
 
-RUN export PYTHONPATH=/usr/bin/python && pip install -r requirements.txt
+RUN pip install -r requirements.txt
 
 RUN python manage.py migrate
 
