@@ -31,13 +31,8 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest
   tests:
-    stage: test
-    tags:
-      - shell
-    script:
-      - python3 -m venv venv
-      - source venv/bin/activate
-      - pip3 install -r requirements.txt
-      - python3 manage.py migrate
-      - python3 manage.py collectstatic
-      - python3 manage.py test
+    using: composite
+    steps: # шаги
+      -
+      - run: "${GITHUB_ACTION_PATH}/test.sh"
+        shell: sh
