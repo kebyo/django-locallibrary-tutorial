@@ -31,11 +31,12 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/simplewhale:latest
   test:
+    runs-on: ubuntu-latest
     steps:
-      run:
-        - python3 -m venv venv
-        - source venv/bin/activate
-        - pip3 install -r requirements.txt
-        - python3 manage.py migrate
-        - python3 manage.py collectstatic
-        - python3 manage.py test
+      - uses: actions/checkout@main
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      - run: pip install -r requirements.txt
+      - name: test
+        run: bash test.sh
