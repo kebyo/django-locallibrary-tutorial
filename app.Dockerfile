@@ -6,12 +6,12 @@ WORKDIR /usr/src/app
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-RUN pip install --upgrade pip
+RUN pip3 install --upgrade pip
 
 COPY . .
 
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 
-RUN python manage.py migrate
+RUN python3 manage.py migrate
 
 CMD gunicorn locallibrary.wsgi:application --bind 0.0.0.0:8000
